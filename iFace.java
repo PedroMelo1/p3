@@ -13,6 +13,8 @@ public class iFace
     static String Pais[]= new String[10];
     static boolean Amigos[][]= new boolean[10][10];
     static boolean Pedidosdeamizade[][]= new boolean[10][10];
+    static String Mensagens[][][]= new String[10][10][20];
+    static int ContMsg[]=new int[10];
 
 
 
@@ -33,17 +35,15 @@ public class iFace
                 if(checklogin()==true)
                 {
                     int option2=0;
-                    while(option2!=8)
+                    while(option2!=6)
                     {
                         System.out.println("iFace, Make friends or not, We dont care");
-                        System.out.println("[1] - Profile");
-                        System.out.println("[2] - Edit Profile");
-                        System.out.println("[3] - Friends");
-                        System.out.println("[4] - Send a message");
-                        System.out.println("[5] - Create a group");
-                        System.out.println("[6] - Add a member to your group");
-                        System.out.println("[7] - Delete profile");
-                        System.out.println("[8] - Log out");
+                        System.out.println("[1] - Perfil");
+                        System.out.println("[2] - Editar Perfil");
+                        System.out.println("[3] - Amigos");
+                        System.out.println("[4] - Comunidades");
+                        System.out.println("[5] - Deletar Perfil");
+                        System.out.println("[6] - Sair");
                         option2=input.nextInt();
 
                         if(option2 == 1)
@@ -64,23 +64,15 @@ public class iFace
                         }
                         else if(option2 == 5)
                         {
-                            
+                            if(deleteProfile()==true)
+                                option2=6;
                         }
                         else if(option2 == 6)
                         {
-                            
-                        }
-                        else if(option2 == 7)
-                        {
-                            if(deleteProfile()==true)
-                                option2=8;
-                        }
-                        else if(option2 == 8)
-                        {
-                            System.out.println("Good bye");
+                            System.out.println("Volte Sempre!");
                         }
                         else
-                            System.out.println("Opção invalida");
+                            System.out.println("Opção inválida");
                         
                     }
                 }  
@@ -95,7 +87,7 @@ public class iFace
                 System.out.println("Adeus");
             }
             else
-                System.out.println("Opção invalida");  
+                System.out.println("Opção inválida");  
         }
 
 
@@ -159,7 +151,7 @@ public class iFace
                 return true;
             }
         }
-        System.out.println("Usuario ou Senha incorreto");
+        System.out.println("Usuário ou Senha incorreto.");
         return false;
     }
 
@@ -176,7 +168,7 @@ public class iFace
         int op = 0;
         while(op!=7)
         {
-            System.out.println("O que deseja editar");
+            System.out.println("O que deseja editar?");
             System.out.println("[1] - Nome de usuario");
             System.out.println("[2] - Senha");
             System.out.println("[3] - Data de Nascimento");
@@ -212,11 +204,11 @@ public class iFace
             }
             else if(op==6)
             {
-                System.out.println("Digite o novo País");
+                System.out.println("Digite o novo País:");
                 Pais[logado]=input.next();
             }
             else
-                System.out.println("Opção Inválida");   
+                System.out.println("Opção Inválida.");   
         }
 
     }
@@ -225,13 +217,15 @@ public class iFace
     {
         int op=0;
         int flag;
-        while(op!=5)
+        while(op!=7)
         {
             System.out.println("[1] - Lista de amigos");
             System.out.println("[2] - Adicionar amigos");
             System.out.println("[3] - Pedidos de amizade");
-            System.out.println("[4] - Remover amigos");
-            System.out.println("[5] - Voltar");
+            System.out.println("[4] - Enviar Mensagem");
+            System.out.println("[5] - Ler mensagens recebidas");
+            System.out.println("[6] - Remover amigos");
+            System.out.println("[7] - Voltar");
             op=input.nextInt();
             if(op==1)
             {
@@ -274,7 +268,7 @@ public class iFace
                 }
                 if(flag!=1)
                 {
-                    System.out.println("Usuario não encontrado");
+                    System.out.println("Usuario não encontrado.");
                 }
             }
             else if(op==3)
@@ -293,29 +287,78 @@ public class iFace
                         {
                             Amigos[logado][i]=true;
                             Pedidosdeamizade[logado][i]=false;
-                            System.out.println("Pedido de amizade aceito");
+                            System.out.println("Pedido de amizade aceito.");
 
                         }
                         else if(op2==2)
                         {
                             Pedidosdeamizade[logado][i]=false;
-                            System.out.println("Pedido de amizade recusado");
+                            System.out.println("Pedido de amizade recusado.");
                         }   
                     }
                 }
                 if(flag!=1)
                 {
-                    System.out.println("Você não possui pedidos de amizade");
+                    System.out.println("Você não possui pedidos de amizade.");
                 }
             }
             else if(op==4)
             {
-
+                flag=0;
+                System.out.println("Digite o nome do Usuário para quem deseja enviar uma mensagem:");
+                String nome=input.next();
+                for(int i=0;i<10;i++)
+                {
+                    if(nome.equals(Usuarios[i]))
+                    {
+                        if(ContMsg[i]<20)
+                        {
+                            System.out.format("Digite a Mensagem a ser enviada para %s:", Usuarios[i]);
+                            Mensagens[i][logado][ContMsg[i]++]=input.next();
+                            flag=1;
+                            System.out.println("Mensagem Enviada.");
+                            
+                        }
+                        else
+                        {
+                            System.out.println("O Usuário não pode receber mais mensagens");
+                            flag=1;
+                        }
+                    }
+                }
+                if(flag!=1)
+                {
+                    System.out.println("Usuário não encontrado");
+                }
             }
             else if(op==5)
             {
-                
+                flag=0;
+                for(int i=0;i<10;i++)
+                {
+                    
+                    if(Mensagens[logado][i][0]!=null)
+                    {
+                        flag=1;
+                        for(int j=0;j<ContMsg[i];j++)
+                        {
+                            if(Mensagens[logado][i][j]!=null)
+                            {
+                                System.out.format("Mensagem de %s:%n", Usuarios[i]);
+                                System.out.format("%s%n", Mensagens[logado][i][j]);
+                            }
+                        }
+                    }
+                }
+                if(flag!=1)
+                {
+                    System.out.println("Você não possui mensagens");
+                }
             }
+            else if(op==6);
+
+            else if(op==7);
+
             else
                 System.out.println("Opção Inválida");
 
