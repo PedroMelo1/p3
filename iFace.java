@@ -10,7 +10,9 @@ public class iFace
     static String Nickname[]= new String[10];
     static boolean Amigos[][]= new boolean[10][10];
     static boolean Pedidosdeamizade[][]= new boolean[10][10];
-    static String Mensagens[][][]= new String[10][10][20];
+    static String Mensagens[][][]= new String[10][10][10];
+    static String Comunidades[][]= new String[10][11];
+    static String Descricao[]= new String[10];
 
 
 
@@ -58,6 +60,10 @@ public class iFace
                         else if(option2 == 4)
                         {
                             Message();
+                        }
+                        else if(option2 == 5)
+                        {
+                            Community();
                         }
                         else if(option2 == 6)
                         {
@@ -156,6 +162,7 @@ public class iFace
         int op = 0;
         while(op!=4)
         {
+            System.out.println("--Edição de Perfil--");
             System.out.println("O que deseja editar?");
             System.out.println("[1] - Nome de usuário");
             System.out.println("[2] - Senha");
@@ -191,6 +198,7 @@ public class iFace
         int flag;
         while(op!=4)
         {
+            System.out.println("--Amigos--");
             System.out.println("[1] - Lista de amigos");
             System.out.println("[2] - Adicionar amigos");
             System.out.println("[3] - Pedidos de amizade");
@@ -284,6 +292,7 @@ public class iFace
         int flag=0;
         while(op!=3)
         {
+            System.out.println("--Mensagens--");
             System.out.println("[1] - Enviar Mensagem");
             System.out.println("[2] - Ler mensagens recebidas");
             System.out.println("[3] - Voltar");
@@ -346,6 +355,122 @@ public class iFace
                 System.out.println("Opção Inválida");
         }
     }
+
+    public static void Community()
+    {
+        int op=0;
+        int flag=0;
+        while(op!=4)
+        {
+            System.out.println("Comunidades");
+            System.out.println("[1] - Criar Comunidade");
+            System.out.println("[2] - Entrar em uma Comunidade");
+            System.out.println("[3] - Informações da sua Comunidade");
+            System.out.println("[4] - Voltar");
+            op=input.nextInt();
+            if(op==1)
+            {
+                flag=0;
+                if(Comunidades[logado][0]==null)
+                {
+                    System.out.println("Digite o nome desejado para a sua Comunidade");
+                    String nome=input.next();
+                    for(int i=0;i<10;i++)
+                    {
+                        if(nome.equals(Comunidades[i][0]))
+                        {                                  
+                                System.out.println("Já existe uma comunidade com esse nome."); 
+                                flag=1;  
+                        }
+                    }
+                    if(flag!=1)
+                    {
+                        Comunidades[logado][0]=nome;   
+                        System.out.println("Digite uma descrição para a sua Comunidade");
+                        Descricao[logado]=input.next();
+                        System.out.println("Comunidade criada com sucesso!");
+                        Comunidades[logado][1]=Usuarios[logado];
+                    }
+                }
+                else
+                {
+                    System.out.println("Você já possui uma Comunidade!");
+                }
+            }
+            else if(op==2)
+            {
+                flag=0;
+                System.out.println("Comunidades existentes:");
+                for(int i=0;i<10;i++)
+                {
+                        if(Comunidades[i][0]!=null)
+                        {                                  
+                                System.out.format("[%d] - Nome: %s %nDescrição: %s%n%n", i+1, Comunidades[i][0], Descricao[i]); 
+                                flag=1;  
+                        }
+                }
+                if(flag!=1)
+                {
+                    System.out.println("Nenhuma.");
+                }
+                else
+                {
+                    int op2=1;
+                    while(op2!=0)
+                    {
+                        System.out.println("Digite o número correspondente a comunidade que deseja entrar ou Digite 0 para sair.");
+                        op2=input.nextInt();
+                        if(op2>0 && op2<11)
+                        {
+                            if(Comunidades[op2-1][logado+1]==null)
+                            {
+                                Comunidades[op2-1][logado+1]=Usuarios[logado];
+                                System.out.format("Bem vindo a comunidade %s%n", Comunidades[op2-1][0]);
+                            }
+                            else
+                            {
+                                System.out.format("Você já faz parte da comunidade %s%n",Comunidades[op2-1][0]);
+                            }
+                            break;
+                        }
+
+                        else if(op2==0);
+
+                        else
+                        {
+                            System.out.println("Opção inválida");
+                        }
+                    }
+                }
+            }
+            else if(op==3)
+            {
+                if(Comunidades[logado][0]!=null)
+                {
+                    System.out.format("Nome: %s%n", Comunidades[logado][0]);
+                    System.out.format("Descrição: %s%n", Descricao[logado]);
+                    System.out.println("Membros:");
+                    for(int i=1;i<11;i++)
+                    {
+                        if(Comunidades[logado][i]!=null)
+                        {
+                            System.out.format("%s%n", Comunidades[logado][i]);
+                        }
+                    }
+                }
+                else
+                {
+                    System.out.println("Você não ainda possui uma comunidade.");
+                }
+            }
+            else if(op==4);
+
+            else
+            {
+                System.out.println("Opção inválida");
+            }
+        }
+    }
     
 
     public static boolean deleteProfile()
@@ -382,7 +507,10 @@ public class iFace
                             Mensagens[i][logado][j]=null;
                         }
                     }
-                    
+                    for(int i=0;i<11;i++)
+                    {
+                        Comunidades[logado][i]=null;   
+                    }
                     System.out.println("Perfil apagado com sucesso :(");
                     return true;
                 }
