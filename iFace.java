@@ -7,14 +7,10 @@ public class iFace
     static String Usuarios[]= new String[10];
     static boolean UsersCheck[] = new boolean[10];
     static String Senha[]= new String[10];
-    static String Nascimento[]= new String[10];
-    static String Cidade[]= new String[10];
-    static String Estado[]= new String[10];
-    static String Pais[]= new String[10];
+    static String Nickname[]= new String[10];
     static boolean Amigos[][]= new boolean[10][10];
     static boolean Pedidosdeamizade[][]= new boolean[10][10];
     static String Mensagens[][][]= new String[10][10][20];
-    static int ContMsg[]=new int[10];
 
 
 
@@ -35,15 +31,16 @@ public class iFace
                 if(checklogin()==true)
                 {
                     int option2=0;
-                    while(option2!=6)
+                    while(option2!=7)
                     {
                         System.out.println("iFace, Make friends or not, We dont care");
                         System.out.println("[1] - Perfil");
                         System.out.println("[2] - Editar Perfil");
                         System.out.println("[3] - Amigos");
-                        System.out.println("[4] - Comunidades");
-                        System.out.println("[5] - Deletar Perfil");
-                        System.out.println("[6] - Sair");
+                        System.out.println("[4] - Mensagens");
+                        System.out.println("[5] - Comunidades");
+                        System.out.println("[6] - Deletar Perfil");
+                        System.out.println("[7] - Sair");
                         option2=input.nextInt();
 
                         if(option2 == 1)
@@ -60,14 +57,14 @@ public class iFace
                         }
                         else if(option2 == 4)
                         {
-                            
-                        }
-                        else if(option2 == 5)
-                        {
-                            if(deleteProfile()==true)
-                                option2=6;
+                            Message();
                         }
                         else if(option2 == 6)
+                        {
+                            if(deleteProfile()==true)
+                                option2=7;
+                        }
+                        else if(option2 == 7)
                         {
                             System.out.println("Volte Sempre!");
                         }
@@ -106,31 +103,25 @@ public class iFace
         }
         if(i>=10)
         {
-            System.out.println("Capacidade maxima atingida");
+            System.out.println("Capacidade máxima atingida");
             return;
         }
-        System.out.println("Digite o seu nome de Usuario:");
+        System.out.println("Digite o seu nome de Usuário:");
         String user=input.next();
         for(int j=0;j<10;j++)
         {
             if(user.equals(Usuarios[j]))
             {
                 UsersCheck[i]=false;
-                System.out.println("Nome de Usuario indisponível");
+                System.out.println("Nome de Usuário indisponível");
                 return;
             }
         }
         Usuarios[i]=user;
         System.out.println("Digite a sua senha: ");
         Senha[i]=input.next();
-        System.out.println("Data de nascimento(dd/mm/aaaa): ");
-        Nascimento[i]=input.next();
-        System.out.println("País: ");
-        Pais[i]=input.next();
-        System.out.println("Estado: ");
-        Estado[i]=input.next();
-        System.out.println("Cidade: ");
-        Cidade[i]=input.next();
+        System.out.println("Digite o seu Nick: ");
+        Nickname[i]=input.next();
 
         System.out.println("Conta criada com sucesso!");
 
@@ -138,7 +129,7 @@ public class iFace
 
     public static boolean checklogin()
     {
-        System.out.println("Usuario: ");
+        System.out.println("Nome de Usuario: ");
         String user= input.next();
         System.out.println("Senha: ");
         String senha= input.next();
@@ -157,29 +148,23 @@ public class iFace
 
     public static void printProfile()
     {
-        System.out.format("Nome: %s%n", Usuarios[logado]);
-        System.out.format("Data de Nascimento: %s%n", Nascimento[logado]);
-        System.out.format("Cidade: %s%n", Cidade[logado]);
-        System.out.format("Estado: %s%n", Estado[logado]);
-        System.out.format("País: %s%n", Pais[logado]);
+        System.out.format("Nome de usuário: %s%n", Usuarios[logado]);
+        System.out.format("Nick: %s%n", Nickname[logado]);
     }
     public static void editProfile()
     {
         int op = 0;
-        while(op!=7)
+        while(op!=4)
         {
             System.out.println("O que deseja editar?");
-            System.out.println("[1] - Nome de usuario");
+            System.out.println("[1] - Nome de usuário");
             System.out.println("[2] - Senha");
-            System.out.println("[3] - Data de Nascimento");
-            System.out.println("[4] - Cidade");
-            System.out.println("[5] - Estado");
-            System.out.println("[6] - País");
-            System.out.println("[7] - Voltar");
+            System.out.println("[3] - Nick");
+            System.out.println("[4] - Voltar");
             op = input.nextInt();
             if(op==1)
             {
-                System.out.println("Digite o novo nome de Usuario:");
+                System.out.println("Digite o novo nome de Usuário:");
                 Usuarios[logado]=input.next();
             }
             else if(op==2)
@@ -189,24 +174,11 @@ public class iFace
             }
             else if(op==3)
             {
-                System.out.println("Digite a nova Data de Nascimento:");
-                Nascimento[logado]=input.next();
+                System.out.println("Digite o novo nick:");
+                Nickname[logado]=input.next();
             }
-            else if(op==4)
-            {
-                System.out.println("Digite a nova Cidade:");
-                Cidade[logado]=input.next();
-            }
-            else if(op==5)
-            {
-                System.out.println("Digite o novo Estado:");
-                Estado[logado]=input.next();
-            }
-            else if(op==6)
-            {
-                System.out.println("Digite o novo País:");
-                Pais[logado]=input.next();
-            }
+            else if(op==4);
+
             else
                 System.out.println("Opção Inválida.");   
         }
@@ -217,15 +189,12 @@ public class iFace
     {
         int op=0;
         int flag;
-        while(op!=7)
+        while(op!=4)
         {
             System.out.println("[1] - Lista de amigos");
             System.out.println("[2] - Adicionar amigos");
             System.out.println("[3] - Pedidos de amizade");
-            System.out.println("[4] - Enviar Mensagem");
-            System.out.println("[5] - Ler mensagens recebidas");
-            System.out.println("[6] - Remover amigos");
-            System.out.println("[7] - Voltar");
+            System.out.println("[4] - Voltar");
             op=input.nextInt();
             if(op==1)
             {
@@ -235,7 +204,7 @@ public class iFace
                 {
                     if(Amigos[logado][i]==true && Amigos[i][logado]==true)
                     {
-                        System.out.format("%s%n", Usuarios[i]);
+                        System.out.format("%s%n", Nickname[i]);
                         flag=1;                      
                     }
                 }
@@ -247,15 +216,15 @@ public class iFace
             else if(op==2)
             {
                 flag=0;
-                System.out.println("Digite o nome do usuario:");
+                System.out.println("Digite o nick do Usuário:");
                 String amigo=input.next();
                 for(int i=0;i<10;i++)
                 {
-                    if(amigo.equals(Usuarios[i]))
+                    if(amigo.equals(Nickname[i]))
                     {
                         if(Amigos[i][logado]==true && Amigos[logado][i]==true)
                         {
-                            System.out.format("%s já é seu amigo!%n", Usuarios[i]);
+                            System.out.format("%s já é seu amigo!%n", Nickname[i]);
                         }
                         else
                         {
@@ -268,7 +237,7 @@ public class iFace
                 }
                 if(flag!=1)
                 {
-                    System.out.println("Usuario não encontrado.");
+                    System.out.println("Usuário não encontrado.");
                 }
             }
             else if(op==3)
@@ -278,8 +247,8 @@ public class iFace
                 {
                     if(Pedidosdeamizade[logado][i]==true)
                     {
-                        System.out.format("%s deseja ser seu amigo%n",Usuarios[i]);
-                        System.out.format("Deseja confirmar a amizade com %s?%n",Usuarios[i]);
+                        System.out.format("%s deseja ser seu amigo%n",Nickname[i]);
+                        System.out.format("Deseja confirmar a amizade com %s?%n",Nickname[i]);
                         System.out.println("[1] - Sim");
                         System.out.println("[2] - Não");
                         int op2=input.nextInt();
@@ -302,27 +271,47 @@ public class iFace
                     System.out.println("Você não possui pedidos de amizade.");
                 }
             }
-            else if(op==4)
+            else if(op==4);
+
+            else
+                System.out.println("Opção Inválida");
+        }
+    }
+
+    public static void Message()
+    {
+        int op=0;
+        int flag=0;
+        while(op!=3)
+        {
+            System.out.println("[1] - Enviar Mensagem");
+            System.out.println("[2] - Ler mensagens recebidas");
+            System.out.println("[3] - Voltar");
+            op=input.nextInt();
+            if(op==1)
             {
                 flag=0;
-                System.out.println("Digite o nome do Usuário para quem deseja enviar uma mensagem:");
+                System.out.println("Digite o nick do Usuário para quem deseja enviar uma mensagem:");
                 String nome=input.next();
                 for(int i=0;i<10;i++)
                 {
-                    if(nome.equals(Usuarios[i]))
+                    if(nome.equals(Nickname[i]))
                     {
-                        if(ContMsg[i]<20)
+                        int j=0;
+                        for(j=0;j<10;j++)
                         {
-                            System.out.format("Digite a Mensagem a ser enviada para %s:", Usuarios[i]);
-                            Mensagens[i][logado][ContMsg[i]++]=input.next();
-                            flag=1;
-                            System.out.println("Mensagem Enviada.");
-                            
+                            if(Mensagens[i][logado][j]==null)
+                            {
+                                System.out.format("Digite a Mensagem a ser enviada para %s:", Nickname[i]);
+                                Mensagens[i][logado][j]=input.next();
+                                flag=1;
+                                System.out.println("Mensagem Enviada.");
+                                break;   
+                            }
                         }
-                        else
+                        if(j==10)
                         {
                             System.out.println("O Usuário não pode receber mais mensagens");
-                            flag=1;
                         }
                     }
                 }
@@ -331,40 +320,33 @@ public class iFace
                     System.out.println("Usuário não encontrado");
                 }
             }
-            else if(op==5)
+            else if(op==2)
             {
                 flag=0;
                 for(int i=0;i<10;i++)
                 {
-                    
-                    if(Mensagens[logado][i][0]!=null)
+                    for(int j=0;j<10;j++)
                     {
-                        flag=1;
-                        for(int j=0;j<ContMsg[i];j++)
+                        if(Mensagens[logado][i][j]!=null)
                         {
-                            if(Mensagens[logado][i][j]!=null)
-                            {
-                                System.out.format("Mensagem de %s:%n", Usuarios[i]);
-                                System.out.format("%s%n", Mensagens[logado][i][j]);
-                            }
+                            flag=1;
+                            System.out.format("Mensagem de %s:%n", Nickname[i]);
+                            System.out.format("%s%n", Mensagens[logado][i][j]);
                         }
-                    }
+                    }   
                 }
                 if(flag!=1)
                 {
                     System.out.println("Você não possui mensagens");
                 }
             }
-            else if(op==6);
-
-            else if(op==7);
+            else if(op==3);
 
             else
                 System.out.println("Opção Inválida");
-
-
         }
     }
+    
 
     public static boolean deleteProfile()
     {
@@ -386,16 +368,21 @@ public class iFace
                     Usuarios[logado]=null;
                     Senha[logado]=null;
                     UsersCheck[logado]=false;
-                    Nascimento[logado]=null;
-                    Cidade[logado]=null;
-                    Estado[logado]=null;
-                    Pais[logado]=null;
+                    Nickname[logado]=null;
                     for(int i=0;i<10;i++)
                     {
                         Amigos[logado][i]=false;
                         Amigos[i][logado]=false;
                         Pedidosdeamizade[i][logado]=false;
                     }
+                    for(int i=0;i<10;i++)
+                    {
+                        for(int j=0;j<10;j++)
+                        {
+                            Mensagens[i][logado][j]=null;
+                        }
+                    }
+                    
                     System.out.println("Perfil apagado com sucesso :(");
                     return true;
                 }
