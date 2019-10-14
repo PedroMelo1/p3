@@ -28,6 +28,7 @@ public class iFace
             System.out.println("[2] - Create Account");
             System.out.println("[3] - Exit");
             option = input.nextInt();
+            clear();
             if(option == 1)
             {
                 if(checklogin()==true)
@@ -44,6 +45,7 @@ public class iFace
                         System.out.println("[6] - Deletar Perfil");
                         System.out.println("[7] - Sair");
                         option2=input.nextInt();
+                        clear();
 
                         if(option2 == 1)
                         {
@@ -69,6 +71,7 @@ public class iFace
                         {
                             if(deleteProfile()==true)
                                 option2=7;
+
                         }
                         else if(option2 == 7)
                         {
@@ -76,6 +79,7 @@ public class iFace
                         }
                         else
                             System.out.println("Opção inválida");
+                            clear();
                         
                     }
                 }  
@@ -87,10 +91,11 @@ public class iFace
             }
             else if(option == 3)
             {
-                System.out.println("Adeus");
+                System.out.println("Adeus");                
             }
             else
-                System.out.println("Opção inválida");  
+                System.out.println("Opção inválida");
+                clear();  
         }
 
 
@@ -120,6 +125,7 @@ public class iFace
             {
                 UsersCheck[i]=false;
                 System.out.println("Nome de Usuário indisponível");
+                clear();
                 return;
             }
         }
@@ -128,8 +134,8 @@ public class iFace
         Senha[i]=input.next();
         System.out.println("Digite o seu Nick: ");
         Nickname[i]=input.next();
-
         System.out.println("Conta criada com sucesso!");
+        clear();
 
     }
 
@@ -139,16 +145,19 @@ public class iFace
         String user= input.next();
         System.out.println("Senha: ");
         String senha= input.next();
+        clear();
         for(int i=0;i<10;i++)
         {
             if(user.equals(Usuarios[i]) && senha.equals(Senha[i]))
             {
                 System.out.println("Login feito com sucesso!");
                 logado=i;
+                clear();
                 return true;
             }
         }
         System.out.println("Usuário ou Senha incorreto.");
+        clear();
         return false;
     }
 
@@ -169,25 +178,33 @@ public class iFace
             System.out.println("[3] - Nick");
             System.out.println("[4] - Voltar");
             op = input.nextInt();
+            clear();
             if(op==1)
             {
                 System.out.println("Digite o novo nome de Usuário:");
                 Usuarios[logado]=input.next();
+                System.out.println("Nome de Usuário alterado.");
+                clear();
             }
             else if(op==2)
             {
                 System.out.println("Digite a nova Senha:");
                 Senha[logado]=input.next();
+                System.out.println("Senha alterada.");
+                clear();
             }
             else if(op==3)
             {
                 System.out.println("Digite o novo nick:");
                 Nickname[logado]=input.next();
+                System.out.println("Nick alterado.");
+                clear();
             }
             else if(op==4);
 
             else
-                System.out.println("Opção Inválida.");   
+                System.out.println("Opção Inválida.");
+                clear();   
         }
 
     }
@@ -204,6 +221,7 @@ public class iFace
             System.out.println("[3] - Pedidos de amizade");
             System.out.println("[4] - Voltar");
             op=input.nextInt();
+            clear();
             if(op==1)
             {
                 flag=0;
@@ -219,6 +237,7 @@ public class iFace
                 if(flag!=1)
                 {
                     System.out.println("Você ainda não possui amigos.");
+                    clear();
                 }
             }
             else if(op==2)
@@ -239,6 +258,7 @@ public class iFace
                             Amigos[logado][i]=true;
                             Pedidosdeamizade[i][logado]=true;
                             System.out.println("Pedido de amizade enviado!");
+                            clear();
                         }
                         flag=1;
                     }
@@ -246,6 +266,7 @@ public class iFace
                 if(flag!=1)
                 {
                     System.out.println("Usuário não encontrado.");
+                    clear();
                 }
             }
             else if(op==3)
@@ -277,12 +298,19 @@ public class iFace
                 if(flag!=1)
                 {
                     System.out.println("Você não possui pedidos de amizade.");
+                    clear();
+                }
+                else
+                {
+                    System.out.println("Você não possui mais pedidos de amizade.");
+                    clear();
                 }
             }
             else if(op==4);
 
             else
                 System.out.println("Opção Inválida");
+                clear();
         }
     }
 
@@ -297,6 +325,7 @@ public class iFace
             System.out.println("[2] - Ler mensagens recebidas");
             System.out.println("[3] - Voltar");
             op=input.nextInt();
+            clear();
             if(op==1)
             {
                 flag=0;
@@ -311,22 +340,25 @@ public class iFace
                         {
                             if(Mensagens[i][logado][j]==null)
                             {
-                                System.out.format("Digite a Mensagem a ser enviada para %s:", Nickname[i]);
+                                System.out.format("Digite a Mensagem a ser enviada para %s:%n", Nickname[i]);
                                 Mensagens[i][logado][j]=input.next();
                                 flag=1;
                                 System.out.println("Mensagem Enviada.");
+                                clear();
                                 break;   
                             }
                         }
                         if(j==10)
                         {
-                            System.out.println("O Usuário não pode receber mais mensagens");
+                            System.out.println("O Usuário não pode receber mais mensagens.");
+                            clear();
                         }
                     }
                 }
                 if(flag!=1)
                 {
                     System.out.println("Usuário não encontrado");
+                    clear();
                 }
             }
             else if(op==2)
@@ -340,19 +372,21 @@ public class iFace
                         {
                             flag=1;
                             System.out.format("Mensagem de %s:%n", Nickname[i]);
-                            System.out.format("%s%n", Mensagens[logado][i][j]);
+                            System.out.format("%s%n%n%n", Mensagens[logado][i][j]);
                         }
                     }   
                 }
                 if(flag!=1)
                 {
                     System.out.println("Você não possui mensagens");
+                    clear();
                 }
             }
             else if(op==3);
 
             else
                 System.out.println("Opção Inválida");
+                clear();
         }
     }
 
@@ -368,6 +402,7 @@ public class iFace
             System.out.println("[3] - Informações da sua Comunidade");
             System.out.println("[4] - Voltar");
             op=input.nextInt();
+            clear();
             if(op==1)
             {
                 flag=0;
@@ -379,7 +414,8 @@ public class iFace
                     {
                         if(nome.equals(Comunidades[i][10]))
                         {                                  
-                                System.out.println("Já existe uma comunidade com esse nome."); 
+                                System.out.println("Já existe uma comunidade com esse nome.");
+                                clear();
                                 flag=1;  
                         }
                     }
@@ -390,11 +426,13 @@ public class iFace
                         Descricao[logado]=input.next();
                         System.out.println("Comunidade criada com sucesso!");
                         Comunidades[logado][logado]=Usuarios[logado];
+                        clear();
                     }
                 }
                 else
                 {
                     System.out.println("Você já possui uma Comunidade!");
+                    clear();
                 }
             }
             else if(op==2)
@@ -409,9 +447,11 @@ public class iFace
                                 flag=1;  
                         }
                 }
+                clear();
                 if(flag!=1)
                 {
                     System.out.println("Nenhuma.");
+                    clear();
                 }
                 else
                 {
@@ -420,16 +460,18 @@ public class iFace
                     {
                         System.out.println("Digite o número correspondente a comunidade que deseja entrar ou Digite 0 para sair.");
                         op2=input.nextInt();
+                        clear();
                         if(op2>0 && op2<11)
                         {
                             if(Comunidades[op2-1][logado]==null)
                             {
                                 Comunidades[op2-1][logado]=Usuarios[logado];
-                                System.out.format("Bem vindo a comunidade %s%n", Comunidades[op2-1][10]);
+                                System.out.format("Bem vindo a comunidade %s!%n%n%n", Comunidades[op2-1][10]);
                             }
                             else
                             {
                                 System.out.format("Você já faz parte da comunidade %s%n",Comunidades[op2-1][10]);
+                                clear();
                             }
                             break;
                         }
@@ -439,6 +481,7 @@ public class iFace
                         else
                         {
                             System.out.println("Opção inválida");
+                            clear();
                         }
                     }
                 }
@@ -458,9 +501,11 @@ public class iFace
                         }
                     }
                 }
+                clear();
                 else
                 {
                     System.out.println("Você não ainda possui uma comunidade.");
+                    clear();
                 }
             }
             else if(op==4);
@@ -468,6 +513,7 @@ public class iFace
             else
             {
                 System.out.println("Opção inválida");
+                clear();
             }
         }
     }
@@ -488,6 +534,7 @@ public class iFace
                 System.out.println("[1] - Sim");
                 System.out.println("[2] - Não");
                 int op2 = input.nextInt();
+                
                 if(op2 == 1)
                 {
                     Usuarios[logado]=null;
@@ -521,21 +568,31 @@ public class iFace
                 else if(op2 == 2)
                 {
                     System.out.println("Ainda bem :)");
+                    clear();
                     return false;
                 }
                 else
                     System.out.println("Opção Inválida");
+                    clear();
 
             }
             else if(op == 2)
             {
                 System.out.println("Ainda bem :)");
+                clear();
                 return false;
             }
             else
                 System.out.println("Opção Inválida");
+                clear();
         }
         return true;
     }
+
+    public static void clear()
+    {
+        System.out.format("%n%n%n");
+    }
+
 
 }
