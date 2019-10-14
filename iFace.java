@@ -371,13 +371,13 @@ public class iFace
             if(op==1)
             {
                 flag=0;
-                if(Comunidades[logado][0]==null)
+                if(Comunidades[logado][10]==null)
                 {
                     System.out.println("Digite o nome desejado para a sua Comunidade");
                     String nome=input.next();
                     for(int i=0;i<10;i++)
                     {
-                        if(nome.equals(Comunidades[i][0]))
+                        if(nome.equals(Comunidades[i][10]))
                         {                                  
                                 System.out.println("Já existe uma comunidade com esse nome."); 
                                 flag=1;  
@@ -385,11 +385,11 @@ public class iFace
                     }
                     if(flag!=1)
                     {
-                        Comunidades[logado][0]=nome;   
+                        Comunidades[logado][10]=nome;   
                         System.out.println("Digite uma descrição para a sua Comunidade");
                         Descricao[logado]=input.next();
                         System.out.println("Comunidade criada com sucesso!");
-                        Comunidades[logado][1]=Usuarios[logado];
+                        Comunidades[logado][logado]=Usuarios[logado];
                     }
                 }
                 else
@@ -403,9 +403,9 @@ public class iFace
                 System.out.println("Comunidades existentes:");
                 for(int i=0;i<10;i++)
                 {
-                        if(Comunidades[i][0]!=null)
+                        if(Comunidades[i][10]!=null)
                         {                                  
-                                System.out.format("[%d] - Nome: %s %nDescrição: %s%n%n", i+1, Comunidades[i][0], Descricao[i]); 
+                                System.out.format("[%d] - Nome: %s %nDescrição: %s%n%n", i+1, Comunidades[i][10], Descricao[i]); 
                                 flag=1;  
                         }
                 }
@@ -422,14 +422,14 @@ public class iFace
                         op2=input.nextInt();
                         if(op2>0 && op2<11)
                         {
-                            if(Comunidades[op2-1][logado+1]==null)
+                            if(Comunidades[op2-1][logado]==null)
                             {
-                                Comunidades[op2-1][logado+1]=Usuarios[logado];
-                                System.out.format("Bem vindo a comunidade %s%n", Comunidades[op2-1][0]);
+                                Comunidades[op2-1][logado]=Usuarios[logado];
+                                System.out.format("Bem vindo a comunidade %s%n", Comunidades[op2-1][10]);
                             }
                             else
                             {
-                                System.out.format("Você já faz parte da comunidade %s%n",Comunidades[op2-1][0]);
+                                System.out.format("Você já faz parte da comunidade %s%n",Comunidades[op2-1][10]);
                             }
                             break;
                         }
@@ -445,12 +445,12 @@ public class iFace
             }
             else if(op==3)
             {
-                if(Comunidades[logado][0]!=null)
+                if(Comunidades[logado][10]!=null)
                 {
-                    System.out.format("Nome: %s%n", Comunidades[logado][0]);
+                    System.out.format("Nome: %s%n", Comunidades[logado][10]);
                     System.out.format("Descrição: %s%n", Descricao[logado]);
                     System.out.println("Membros:");
-                    for(int i=1;i<11;i++)
+                    for(int i=0;i<10;i++)
                     {
                         if(Comunidades[logado][i]!=null)
                         {
@@ -507,10 +507,14 @@ public class iFace
                             Mensagens[i][logado][j]=null;
                         }
                     }
-                    for(int i=0;i<11;i++)
+                    Comunidades[logado][10]=null;
+                    Descricao[logado]=null;
+                    for(int i=0;i<10;i++)
                     {
+                        Comunidades[i][logado]=null;
                         Comunidades[logado][i]=null;   
                     }
+
                     System.out.println("Perfil apagado com sucesso :(");
                     return true;
                 }
