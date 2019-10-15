@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class iFace
 {
     static int logado;
-    static Scanner input= new Scanner(System.in).useDelimiter("\n");
+    static Scanner input= new Scanner(System.in);
     static String Usuarios[]= new String[10];
     static boolean UsersCheck[] = new boolean[10];
     static String Senha[]= new String[10];
@@ -28,6 +28,7 @@ public class iFace
             System.out.println("[2] - Create Account");
             System.out.println("[3] - Exit");
             option = input.nextInt();
+            input.nextLine();
             clear();
             if(option == 1)
             {
@@ -45,6 +46,7 @@ public class iFace
                         System.out.println("[6] - Deletar Perfil");
                         System.out.println("[7] - Sair");
                         option2=input.nextInt();
+                        input.nextLine();
                         clear();
 
                         if(option2 == 1)
@@ -118,7 +120,7 @@ public class iFace
             return;
         }
         System.out.println("Digite o seu nome de Usuário:");
-        String user=input.next();
+        String user=input.nextLine();
         for(int j=0;j<10;j++)
         {
             if(user.equals(Usuarios[j]))
@@ -131,9 +133,9 @@ public class iFace
         }
         Usuarios[i]=user;
         System.out.println("Digite a sua senha: ");
-        Senha[i]=input.next();
+        Senha[i]=input.nextLine();
         System.out.println("Digite o seu Nick: ");
-        Nickname[i]=input.next();
+        Nickname[i]=input.nextLine();
         System.out.println("Conta criada com sucesso!");
         clear();
 
@@ -142,9 +144,9 @@ public class iFace
     public static boolean checklogin()
     {
         System.out.println("Nome de Usuario: ");
-        String user= input.next();
+        String user= input.nextLine();
         System.out.println("Senha: ");
-        String senha= input.next();
+        String senha= input.nextLine();
         clear();
         for(int i=0;i<10;i++)
         {
@@ -178,25 +180,26 @@ public class iFace
             System.out.println("[3] - Nick");
             System.out.println("[4] - Voltar");
             op = input.nextInt();
+            input.nextLine();
             clear();
             if(op==1)
             {
                 System.out.println("Digite o novo nome de Usuário:");
-                Usuarios[logado]=input.next();
+                Usuarios[logado]=input.nextLine();
                 System.out.println("Nome de Usuário alterado.");
                 clear();
             }
             else if(op==2)
             {
                 System.out.println("Digite a nova Senha:");
-                Senha[logado]=input.next();
+                Senha[logado]=input.nextLine();
                 System.out.println("Senha alterada.");
                 clear();
             }
             else if(op==3)
             {
                 System.out.println("Digite o novo nick:");
-                Nickname[logado]=input.next();
+                Nickname[logado]=input.nextLine();
                 System.out.println("Nick alterado.");
                 clear();
             }
@@ -221,6 +224,7 @@ public class iFace
             System.out.println("[3] - Pedidos de amizade");
             System.out.println("[4] - Voltar");
             op=input.nextInt();
+            input.nextLine();
             clear();
             if(op==1)
             {
@@ -244,7 +248,7 @@ public class iFace
             {
                 flag=0;
                 System.out.println("Digite o nick do Usuário:");
-                String amigo=input.next();
+                String amigo=input.nextLine();
                 for(int i=0;i<10;i++)
                 {
                     if(amigo.equals(Nickname[i]))
@@ -281,6 +285,7 @@ public class iFace
                         System.out.println("[1] - Sim");
                         System.out.println("[2] - Não");
                         int op2=input.nextInt();
+                        input.nextLine();
                         if(op2==1)
                         {
                             Amigos[logado][i]=true;
@@ -325,12 +330,13 @@ public class iFace
             System.out.println("[2] - Ler mensagens recebidas");
             System.out.println("[3] - Voltar");
             op=input.nextInt();
+            input.nextLine();
             clear();
             if(op==1)
             {
                 flag=0;
                 System.out.println("Digite o nick do Usuário para quem deseja enviar uma mensagem:");
-                String nome=input.next();
+                String nome=input.nextLine();
                 for(int i=0;i<10;i++)
                 {
                     if(nome.equals(Nickname[i]))
@@ -341,7 +347,7 @@ public class iFace
                             if(Mensagens[i][logado][j]==null)
                             {
                                 System.out.format("Digite a Mensagem a ser enviada para %s:%n", Nickname[i]);
-                                Mensagens[i][logado][j]=input.next();
+                                Mensagens[i][logado][j]=input.nextLine();
                                 flag=1;
                                 System.out.println("Mensagem Enviada.");
                                 clear();
@@ -402,6 +408,7 @@ public class iFace
             System.out.println("[3] - Informações da sua Comunidade");
             System.out.println("[4] - Voltar");
             op=input.nextInt();
+            input.nextLine();
             clear();
             if(op==1)
             {
@@ -409,7 +416,7 @@ public class iFace
                 if(Comunidades[logado][10]==null)
                 {
                     System.out.println("Digite o nome desejado para a sua Comunidade");
-                    String nome=input.next();
+                    String nome=input.nextLine();
                     for(int i=0;i<10;i++)
                     {
                         if(nome.equals(Comunidades[i][10]))
@@ -423,7 +430,7 @@ public class iFace
                     {
                         Comunidades[logado][10]=nome;   
                         System.out.println("Digite uma descrição para a sua Comunidade");
-                        Descricao[logado]=input.next();
+                        Descricao[logado]=input.nextLine();
                         System.out.println("Comunidade criada com sucesso!");
                         Comunidades[logado][logado]=Usuarios[logado];
                         clear();
@@ -460,6 +467,7 @@ public class iFace
                     {
                         System.out.println("Digite o número correspondente a comunidade que deseja entrar ou Digite 0 para sair.");
                         op2=input.nextInt();
+                        input.nextLine();
                         clear();
                         if(op2>0 && op2<11)
                         {
@@ -501,7 +509,6 @@ public class iFace
                         }
                     }
                 }
-                clear();
                 else
                 {
                     System.out.println("Você não ainda possui uma comunidade.");
@@ -528,13 +535,14 @@ public class iFace
             System.out.println("[1] - Sim");
             System.out.println("[2] - Não");
             op = input.nextInt();
+            input.nextLine();
             if(op==1)
             {
                 System.out.println("Tem certeza?");
                 System.out.println("[1] - Sim");
                 System.out.println("[2] - Não");
                 int op2 = input.nextInt();
-                
+                input.nextLine();
                 if(op2 == 1)
                 {
                     Usuarios[logado]=null;
