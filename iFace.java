@@ -23,10 +23,10 @@ public class iFace
         int option = 0;
         while(option != 3)
         {
-            System.out.println("Welcome to iFace");
-            System.out.println("[1] - Login");
-            System.out.println("[2] - Create Account");
-            System.out.println("[3] - Exit");
+            System.out.println("Bem vindo ao iFace!");
+            System.out.println("[1] - Entrar");
+            System.out.println("[2] - Criar conta");
+            System.out.println("[3] - Sair");
             option = input.nextInt();
             input.nextLine();
             clear();
@@ -37,7 +37,7 @@ public class iFace
                     int option2=0;
                     while(option2!=7)
                     {
-                        System.out.println("iFace, Make friends or not, We dont care");
+                        System.out.println("--iFace--");
                         System.out.println("[1] - Perfil");
                         System.out.println("[2] - Editar Perfil");
                         System.out.println("[3] - Amigos");
@@ -134,7 +134,7 @@ public class iFace
         Usuarios[i]=user;
         System.out.println("Digite a sua senha: ");
         Senha[i]=input.nextLine();
-        System.out.println("Digite o seu Nick: ");
+        System.out.println("Digite o seu Nickname: ");
         Nickname[i]=input.nextLine();
         System.out.println("Conta criada com sucesso!");
         clear();
@@ -166,7 +166,7 @@ public class iFace
     public static void printProfile()
     {
         System.out.format("Nome de usuário: %s%n", Usuarios[logado]);
-        System.out.format("Nick: %s%n", Nickname[logado]);
+        System.out.format("Nickname: %s%n", Nickname[logado]);
     }
     public static void editProfile()
     {
@@ -177,7 +177,7 @@ public class iFace
             System.out.println("O que deseja editar?");
             System.out.println("[1] - Nome de usuário");
             System.out.println("[2] - Senha");
-            System.out.println("[3] - Nick");
+            System.out.println("[3] - Nickname");
             System.out.println("[4] - Voltar");
             op = input.nextInt();
             input.nextLine();
@@ -200,7 +200,7 @@ public class iFace
             {
                 System.out.println("Digite o novo nick:");
                 Nickname[logado]=input.nextLine();
-                System.out.println("Nick alterado.");
+                System.out.println("Nickname alterado.");
                 clear();
             }
             else if(op==4);
@@ -247,7 +247,7 @@ public class iFace
             else if(op==2)
             {
                 flag=0;
-                System.out.println("Digite o nick do Usuário:");
+                System.out.println("Digite o Nickname do Usuário:");
                 String amigo=input.nextLine();
                 for(int i=0;i<10;i++)
                 {
@@ -280,7 +280,7 @@ public class iFace
                 {
                     if(Pedidosdeamizade[logado][i]==true)
                     {
-                        System.out.format("%s deseja ser seu amigo%n",Nickname[i]);
+                        System.out.format("%s deseja ser seu amigo.%n",Nickname[i]);
                         System.out.format("Deseja confirmar a amizade com %s?%n",Nickname[i]);
                         System.out.println("[1] - Sim");
                         System.out.println("[2] - Não");
@@ -290,13 +290,13 @@ public class iFace
                         {
                             Amigos[logado][i]=true;
                             Pedidosdeamizade[logado][i]=false;
-                            System.out.println("Pedido de amizade aceito.");
+                            System.out.println("Pedido de amizade aceito.%n");
 
                         }
                         else if(op2==2)
                         {
                             Pedidosdeamizade[logado][i]=false;
-                            System.out.println("Pedido de amizade recusado.");
+                            System.out.println("Pedido de amizade recusado.%n");
                         }   
                     }
                 }
@@ -335,7 +335,7 @@ public class iFace
             if(op==1)
             {
                 flag=0;
-                System.out.println("Digite o nick do Usuário para quem deseja enviar uma mensagem:");
+                System.out.println("Digite o Nickname do Usuário para quem deseja enviar uma mensagem:");
                 String nome=input.nextLine();
                 for(int i=0;i<10;i++)
                 {
@@ -378,7 +378,7 @@ public class iFace
                         {
                             flag=1;
                             System.out.format("Mensagem de %s:%n", Nickname[i]);
-                            System.out.format("%s%n%n%n", Mensagens[logado][i][j]);
+                            System.out.format("%s%n%n", Mensagens[logado][i][j]);
                         }
                     }   
                 }
@@ -400,13 +400,14 @@ public class iFace
     {
         int op=0;
         int flag=0;
-        while(op!=4)
+        while(op!=5)
         {
-            System.out.println("Comunidades");
+            System.out.println("--Comunidades--");
             System.out.println("[1] - Criar Comunidade");
             System.out.println("[2] - Entrar em uma Comunidade");
-            System.out.println("[3] - Informações da sua Comunidade");
-            System.out.println("[4] - Voltar");
+            System.out.println("[3] - Administrar a sua Comunidade");
+            System.out.println("[4] - Lista de Comunidades que você faz parte");
+            System.out.println("[5] - Voltar");
             op=input.nextInt();
             input.nextLine();
             clear();
@@ -450,11 +451,10 @@ public class iFace
                 {
                         if(Comunidades[i][10]!=null)
                         {                                  
-                                System.out.format("[%d] - Nome: %s %nDescrição: %s%n%n", i+1, Comunidades[i][10], Descricao[i]); 
+                                System.out.format("[%d] - Comunidade: %s %nDescrição: %s%nAdm: %s%n%n", i+1,Comunidades[i][10],Descricao[i],Usuarios[i]);  
                                 flag=1;  
                         }
                 }
-                clear();
                 if(flag!=1)
                 {
                     System.out.println("Nenhuma.");
@@ -498,14 +498,107 @@ public class iFace
             {
                 if(Comunidades[logado][10]!=null)
                 {
-                    System.out.format("Nome: %s%n", Comunidades[logado][10]);
-                    System.out.format("Descrição: %s%n", Descricao[logado]);
-                    System.out.println("Membros:");
-                    for(int i=0;i<10;i++)
+                    int op3=0;
+                    while(op3!=5)
                     {
-                        if(Comunidades[logado][i]!=null)
+                        flag=0;
+                        System.out.println("--Sua Comunidade--");
+                        System.out.println("[1] - Informações da sua Comunidade");
+                        System.out.println("[2] - Alterar o Nome da sua Comunidade");
+                        System.out.println("[3] - Alterar a Descrição da sua Comunidade");
+                        System.out.println("[4] - Expulsar membro da sua Comunidade");
+                        System.out.println("[5] - Voltar");
+                        op3=input.nextInt();
+                        input.nextLine();
+                        clear();
+                        if(op3==1)
                         {
-                            System.out.format("%s%n", Comunidades[logado][i]);
+                            System.out.format("Nome: %s%n", Comunidades[logado][10]);
+                            System.out.format("Descrição: %s%n", Descricao[logado]);
+                            System.out.format("Adm: %s%n", Usuarios[logado]);
+                            System.out.println("Membros:");
+                            for(int i=0;i<10;i++)
+                            {
+                                if(Comunidades[logado][i]!=null && Comunidades[logado][i].equals(Usuarios[logado])==false)
+                                {
+                                    System.out.format("%s%n", Comunidades[logado][i]);
+                                    flag=1;
+                                }
+                            }
+                            if(flag!=1)
+                            {
+                                System.out.println("Nenhum.\n");
+                            }
+                        }
+                        else if(op3==2)
+                        {
+                            System.out.println("Digite o novo nome da Comunidade:");
+                            String nome=input.nextLine();
+                            for(int i=0;i<10;i++)
+                            {
+                                if(nome.equals(Comunidades[i][10]))
+                                {                                  
+                                        System.out.println("Já existe uma comunidade com esse nome.");
+                                        clear();
+                                        flag=1;  
+                                }
+                            }
+                            if(flag!=1)
+                            {
+                                System.out.println("Nome da Comunidade alterado.");
+                                Comunidades[logado][10]=nome;
+                                clear();
+                            }
+                        }
+                        else if(op3==3)
+                        {
+                            System.out.println("Digite a nova Descrição da Comunidade:");
+                            Descricao[logado]=input.nextLine();
+                            System.out.println("Descrição da Comunidade alterada.");
+                            clear();
+                        }
+                        else if(op3==4)
+                        {
+                            System.out.println("Membros:");
+                            for(int i=0;i<10;i++)
+                            {
+                                if(Comunidades[logado][i]!=null && Comunidades[logado][i].equals(Usuarios[logado])==false)
+                                {
+                                    System.out.format("[%d] - %s%n", i+1,Comunidades[logado][i]);
+                                    flag=1;
+                                }
+                            }
+                            if(flag==1)
+                            {
+                                System.out.println("Digite o número correspondente ao membro que deseja expulsar ou digite 0 para voltar.");
+                                int membro=input.nextInt();
+                                input.nextLine();
+                                if(membro>0 && membro<11)
+                                {
+                                    Comunidades[logado][membro-1]=null;
+                                    System.out.println("Membro expulso com sucesso.");
+                                    clear();
+                                }
+                                else if(membro==0);
+
+                                else
+                                {
+                                    System.out.println("Opção Inválida.");
+                                    clear();
+                                }
+                            }
+                            else
+                            {
+                                System.out.println("A sua Comunidade não possui membros.");
+                                clear();
+                            }
+                        }
+                        else if(op3==5);
+                        
+                        else
+                        {
+                            System.out.println("Opção Inválida.");
+                            clear();
                         }
                     }
                 }
@@ -515,7 +608,24 @@ public class iFace
                     clear();
                 }
             }
-            else if(op==4);
+            else if(op==4)
+            {
+                for(int i=0;i<10;i++)
+                {
+                        if(Comunidades[i][logado]!=null)
+                        {                                  
+                                System.out.format("Comunidade: %s %nDescrição: %s%nAdm: %s%n%n", Comunidades[i][10],Descricao[i],Usuarios[i]); 
+                                flag=1;  
+                        }
+                }
+                if(flag!=1)
+                {
+                    System.out.println("Você não faz parte de nenhuma Comuninade.");
+                    clear();
+                }
+            }
+
+            else if(op==5);
 
             else
             {
@@ -599,8 +709,7 @@ public class iFace
 
     public static void clear()
     {
-        System.out.format("%n%n%n");
+        System.out.format("%n%n");
     }
-
 
 }
