@@ -290,13 +290,14 @@ public class iFace
                         {
                             Amigos[logado][i]=true;
                             Pedidosdeamizade[logado][i]=false;
-                            System.out.println("Pedido de amizade aceito.%n");
+                            System.out.println("Pedido de amizade aceito");
 
                         }
                         else if(op2==2)
                         {
                             Pedidosdeamizade[logado][i]=false;
-                            System.out.println("Pedido de amizade recusado.%n");
+                            Amigos[i][logado]=false;
+                            System.out.println("Pedido de amizade recusado.");
                         }   
                     }
                 }
