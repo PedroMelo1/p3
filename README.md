@@ -2,8 +2,6 @@
 Projeto de software
 iFace.java
 
-Para Executar o programa compile com javac iFace.java e execute com java iFace.
-
 Ao executar o programa digite o número da opção desejada.
 
 Deve-se criar uma conta primeiro para poder entrar.
